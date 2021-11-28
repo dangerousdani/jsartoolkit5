@@ -27,10 +27,13 @@ html,body {
 
 <p>&larr; <a href="index.html">Back to examples</a></p>
 
-<script async src="../build/artoolkit.debug.js"></script>
+<video src="../images/dani.mov" autoplay loop style="display:none; width:300px" id="video"></video>
+
+<script src="js/third_party/three.js/three.min.js"></script>
 <script src="../js/artoolkit.api.js"></script>
-<script async src="js/third_party/three.js/three.min.js"></script>
-<script async src="../js/artoolkit.three.js"></script>
+<script src="../build/artoolkit.debug.js"></script>
+<script src="js/third_party/three.js/GLTFLoader.js"></script>
+<script src="../js/artoolkit.three.js"></script>
 
 <script>
 
@@ -63,14 +66,17 @@ window.ARThreeOnLoad = function() {
 		// See /doc/patterns/Matrix code 3x3 (72dpi)/20.png
 		var markerRoot = arController.createThreeBarcodeMarker(20);
 
-		var sphere = new THREE.Mesh(
-			new THREE.SphereGeometry(0.5, 8, 8),
-			new THREE.MeshNormalMaterial()
-		);
-		sphere.material.flatShading;
-		sphere.position.z = 0.5;
-		markerRoot.add(sphere);
-		arScene.scene.add(markerRoot);
+		const video = document.getElementById( 'video' );
+		const texture = new THREE.VideoTexture( video );
+
+		const loader = new THREE.GLTFLoader();
+		loader.load( '../images/Calendar.glb', function ( gltf ) {
+			markerRoot.add( gltf.scene );
+			console.log(gltf);
+			gltf.scene.children.find(obj => obj.name == "Cube001").material = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide} );
+		}, undefined, function ( error ) {	
+			console.error( error ); 
+		} );	
 
 		var rotationV = 0;
 		var rotationTarget = 0;
@@ -83,14 +89,18 @@ window.ARThreeOnLoad = function() {
 		var tick = function() {
 			arScene.process();
 			arScene.renderOn(renderer);
-			rotationV += (rotationTarget - sphere.rotation.z) * 0.05;
-			sphere.rotation.z += rotationV;
+			if (markerRoot.children[0] !== undefined) {
+				rotationV += (rotationTarget - markerRoot.children[0].children[25].rotation.z) * 0.05;	
+				markerRoot.children[0].children[25].rotation.z += rotationV;
+			} 
 			rotationV *= 0.8;
 
 			requestAnimationFrame(tick);
 		};
 
 		tick();
+
+		arScene.scene.add(markerRoot);
 
 	}});
 
