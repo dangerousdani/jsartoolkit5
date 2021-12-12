@@ -12,7 +12,7 @@ html,body {
 }
 canvas {
 	transform-origin: 0 0;
-	transform: rotate(-90deg) translateX(-100%);
+	/* transform: rotate(-90deg) translateX(-100%); */
 } 
 
 video {
@@ -66,12 +66,10 @@ window.ARThreeOnLoad = function() {
 		var renderer = new THREE.WebGLRenderer({antialias: true});
 
 		var w = (window.innerWidth / arController.videoHeight) * arController.videoWidth;
-		var h = window.innerWidth;
+		var h = window.innerHeight;
 		renderer.setSize(w, h);
 
 		var myCanvas = renderer.domElement;
-		// myCanvas.width = 100; 
-		// myCanvas.height = 100;
 		document.body.insertBefore(myCanvas, document.body.firstChild);
 
 	

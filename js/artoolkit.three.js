@@ -107,9 +107,8 @@
 			videoScene.add(plane);
 			videoScene.add(videoCamera);
 
-			if (this.orientation === 'portrait') {
-				plane.rotation.z = Math.PI/2;
-			}
+			// plane.rotation.z = Math.PI/2;
+		
 
 			var scene = new THREE.Scene();
 			var camera = new THREE.PerspectiveCamera();
