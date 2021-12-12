@@ -1,19 +1,17 @@
 <html>
 <head>
-<title>1 Stan Hema Christmas Calendar</title>
+	<title>2 Stan Hema Christmas Calendar</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <style>
 html,body {
 	margin: 0;
 	padding: 0;
 	width: 100%;
+	height: 100%;
 	text-align: center;
 	overflow-x: hidden;
 }
 canvas {
-	position: absolute;
-	left: 0;
-	top: 0;
 	width: 100%;
 	height: 100%;
 	transform-origin: 0 0;
@@ -70,7 +68,7 @@ window.ARThreeOnLoad = function() {
 
 		var renderer = new THREE.WebGLRenderer({antialias: true});
 
-		var w = window.innerWidth;
+		var w = (window.innerWidth / arController.videoHeight) * arController.videoWidth;
 		var h = window.innerHeight;
 		renderer.setSize(w, h);
 
