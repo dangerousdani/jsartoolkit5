@@ -96,15 +96,17 @@ var findObjectUnderEvent = function(ev, camera, objects) {
 	var width = parseFloat(style.getPropertyValue('width'));
 	var height = parseFloat(style.getPropertyValue('height'));
 
-	var mouse3D = new THREE.Vector3(
-		- ( vec.x / width  * 2 - 1),
-		( vec.y / height  * 2 - 1.4),
-		0.5
+	var mouse3D = new THREE.Vector2(
+		( vec.x / width  * 2 - 1),
+	-	( vec.y / height  * 2 - 1),
 	);
-	mouse3D.unproject( camera );
-	mouse3D.sub( camera.position );
-	mouse3D.normalize();
-	var raycaster = new THREE.Raycaster( camera.position, mouse3D );
+	console.log(mouse3D)
+//	mouse3D.unproject( camera );
+//	mouse3D.sub( camera.position );
+//	mouse3D.normalize();
+	var raycaster = new THREE.Raycaster();
+	raycaster.setFromCamera(mouse3D, camera);
+ 	//	var raycaster = new THREE.Raycaster( camera.position, mouse3D );
 	var intersects = raycaster.intersectObjects( objects );
 	if ( intersects.length > 0 ) {
 		var obj = intersects[ 0 ].object
