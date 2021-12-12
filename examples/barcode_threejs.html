@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>6 StanHema</title>
+<title>7 StanHema</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <style>
 html,body {
@@ -97,8 +97,8 @@ var findObjectUnderEvent = function(ev, camera, objects) {
 	var height = parseFloat(style.getPropertyValue('height'));
 
 	var mouse3D = new THREE.Vector2(
-		( vec.x / width  * 2 - 1),
-	-	( vec.y / height  * 2 - 1),
+	-	( vec.x / width  * 2 - 1),
+		( vec.y / height  * 2 - 1),
 	);
 	console.log(mouse3D)
 //	mouse3D.unproject( camera );
