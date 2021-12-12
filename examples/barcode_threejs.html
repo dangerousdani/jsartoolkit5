@@ -10,13 +10,11 @@ html,body {
 	text-align: center;
 	overflow-x: hidden;
 }
-.portrait canvas {
-	transform-origin: 0 0;
-	transform: rotate(-90deg) translateX(-100%);
+
+video {
+	display: none;
 }
-.desktop canvas {
- 	transform: scale(-1, 1);
-}
+
 </style>
 </head>
 <body>
@@ -26,13 +24,35 @@ html,body {
 <p>Show <a href="https://github.com/artoolkit/artoolkit5/blob/master/doc/patterns/Matrix%20code%203x3%20(72dpi)/20.png">3x3 marker id 20</a> to camera to display a colorful sphere on top of it. Tap the sphere to rotate it.
 <p>&larr; <a href="index.html">Back to examples</a></p>-->
 
-<video src="../images/dani.mov" autoplay loop muted style="width:300px" id="video"></video>
+
+<video src="../images/video001.mp4" id="video001"></video>
+<video src="../images/video002.mp4" id="video002"></video>
+<video src="../images/video003.mp4" id="video003"></video>
+<video src="../images/video004.mp4" id="video004"></video>
+<video src="../images/video005.mp4" id="video005"></video>
+<video src="../images/video006.mp4" id="video006"></video>
+<video src="../images/video007.mp4" id="video007"></video>
+<video src="../images/video008.mp4" id="video008"></video>
+<video src="../images/video009.mp4" id="video009"></video>
+<video src="../images/video010.mp4" id="video010"></video>
+<video src="../images/video011.mp4" id="video011"></video>
+<video src="../images/video012.mp4" id="video012"></video>
+<video src="../images/video013.mp4" id="video013"></video>
+<video src="../images/video014.mp4" id="video014"></video>
+<video src="../images/video015.mp4" id="video015"></video>
+<video src="../images/video016.mp4" id="video016"></video>
+<video src="../images/video017.mp4" id="video017"></video>
+<video src="../images/video018.mp4" id="video018"></video>
+<video src="../images/video019.mp4" id="video019"></video>
+
+
 
 <script src="js/third_party/three.js/three.min.js"></script>
 <script src="../js/artoolkit.api.js"></script>
 <script src="../build/artoolkit.debug.js"></script>
 <script src="js/third_party/three.js/GLTFLoader.js"></script>
 <script src="../js/artoolkit.three.js"></script>
+<script src="js/threex.domevents.js"></script>
 
 <script>
 
@@ -62,45 +82,77 @@ window.ARThreeOnLoad = function() {
 
 		document.body.insertBefore(renderer.domElement, document.body.firstChild);
 
+	
+
 		// See /doc/patterns/Matrix code 3x3 (72dpi)/20.png
 		var markerRoot = arController.createThreeBarcodeMarker(20);
 
-		const video = document.getElementById( 'video' );
-		const texture = new THREE.VideoTexture( video );
-
+		
+		
 		const loader = new THREE.GLTFLoader();
+		
 		loader.load( '../images/Calendar.glb', function ( gltf ) {
 			markerRoot.add( gltf.scene );
 			console.log(gltf);
-			gltf.scene.children.find(obj => obj.name == "Cube001").material = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide} );
-		}, undefined, function ( error ) {	
-			console.error( error ); 
-		} );	
+			for (i = 1; i < 20; i++) {
+				const objName = i.toString().padStart(3, '0');
+				const video = document.getElementById( 'video' + objName );
+				const texture = new THREE.VideoTexture( video );
+				console.log(objName);
+				gltf.scene.children.find(obj => obj.name == "Cube" + objName).material = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide} );
+			}
 
-		var rotationV = 0;
-		var rotationTarget = 0;
+			document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+			
+			function onDocumentMouseDown( event ) 
+			{
+				var raycaster = new THREE.Raycaster();
+				var mouse = new THREE.Vector2();
 
-		renderer.domElement.addEventListener('click', function(ev) {
-			ev.preventDefault();
-			rotationTarget += 2.5;
-		}, false);
+				mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+				mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+				console.log(mouse)
 
-		var tick = function() {
-			arScene.process();
-			arScene.renderOn(renderer);
-			if (markerRoot.children[0] !== undefined) {
-				rotationV += (rotationTarget - markerRoot.children[0].children[25].rotation.z) * 0.05;	
-				markerRoot.children[0].children[25].rotation.z += rotationV;
-			} 
-			rotationV *= 0.9;
+				raycaster.setFromCamera( mouse, arScene.camera );
+				
+				
+				var intersects = raycaster.intersectObjects( gltf.scene.children, false );
+				console.log(intersects);
+				
 
-			requestAnimationFrame(tick);
-		};
+				try {
+					intersects[0].object.material.map.image.play();
+				} catch {
+					console.log("no click target found");
+				}
+			}
 
-		tick();
-
-		arScene.scene.add(markerRoot);
-
+			
+				
+				var rotationV = 0;
+				var rotationTarget = 0;
+				
+				
+				var tick = function() {
+					arScene.process();
+					arScene.renderOn(renderer);
+					
+					// if (markerRoot.children[0] !== undefined) {
+						// 	rotationV += (rotationTarget - markerRoot.children[0].children[21].rotation.y) * 0.005;	
+						// 	markerRoot.children[0].children[25].rotation.y += rotationV;
+						// } 
+						// rotationV *= 0.9;
+						
+						requestAnimationFrame(tick);
+					};
+					
+					tick();
+					
+					arScene.scene.add(markerRoot);
+				
+			}, undefined, function ( error ) {	
+				console.error( error ); 
+			} );	
 	}});
 
 	delete window.ARThreeOnLoad;
