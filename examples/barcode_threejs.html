@@ -127,15 +127,21 @@ window.ARThreeOnLoad = function() {
 				console.log(targetlist);
 				var intersects = raycaster.intersectObjects( targetlist, false );
 				console.log(intersects);
-				
-				
-				//Tür geht auf
+
 				try {
-					const hitTargetId = intersects[0].object.name.replace("Cube", "")
-					console.log(hitTargetId)
-					intersects[0].object.material.map.image.play();
-					const door = gltf.scene.children.find(element => element.name == "Door" + hitTargetId)
-					door.rotation.y += 2;
+					
+						const hitTargetId = intersects[0].object.name.replace("Cube", "")
+						console.log(hitTargetId)
+						const door = gltf.scene.children.find(element => element.name == "Door" + hitTargetId)
+						const videoObject = intersects[0].object.material.map.image;
+						if (videoObject.paused) {
+							videoObject.play();
+							door.rotation.y += 2;	
+						}
+						else {
+							videoObject.pause();
+							door.rotation.y += -2;
+					}
 				} catch {
 					console.log("door - no click target found");
 				}
