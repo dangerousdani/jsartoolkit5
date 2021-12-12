@@ -23,7 +23,7 @@ video {
 </head>
 <body>
 
-<h1>asdf2</h1>
+<h1>Test 5</h1>
 
 <video src="../images/video001.mp4" id="video001"></video>
 <video src="../images/video002.mp4" id="video002"></video>
@@ -103,8 +103,8 @@ window.ARThreeOnLoad = function() {
 				var raycaster = new THREE.Raycaster();
 				var mouse = new THREE.Vector2();
 
-				mouse.y = - ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-				mouse.x = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+				mouse.x = - ( event.clientY / renderer.domElement.clientWidth ) * 2 - 1;
+				mouse.y = ( event.clientX / renderer.domElement.clientHeight ) * 2 + 1;
 				console.log(mouse)
 
 				raycaster.setFromCamera( mouse, arScene.camera );
