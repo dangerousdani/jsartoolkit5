@@ -10,6 +10,14 @@ html,body {
 	text-align: center;
 	overflow-x: hidden;
 }
+.portrait canvas {
+	transform-origin: 0 0;
+	transform: rotate(-90deg) translateX(-100%);
+}
+
+.desktop canvas {
+ 	transform: scale(-1, 1);
+}
 
 video {
 	display: none;

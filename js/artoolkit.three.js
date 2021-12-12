@@ -112,7 +112,7 @@
 			}
 
 			var scene = new THREE.Scene();
-			var camera = new THREE.Camera();
+			var camera = new THREE.PerspectiveCamera();
 			camera.matrixAutoUpdate = false;
 			setProjectionMatrix(camera.projectionMatrix, this.getCameraMatrix());
 
