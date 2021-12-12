@@ -98,7 +98,7 @@ var findObjectUnderEvent = function(ev, camera, objects) {
 
 	var mouse3D = new THREE.Vector2(
 	-	( vec.x / width  * 2 - 1),
-		( vec.y / height  * 2 - 1),
+		( vec.y / height  * 2 - 1 - 0.7),
 	);
 	console.log(mouse3D)
 //	mouse3D.unproject( camera );
