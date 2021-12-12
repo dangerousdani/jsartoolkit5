@@ -11,6 +11,8 @@ html,body {
 	overflow-x: hidden;
 }
 canvas {
+	width: 100%;
+	height: 100%;
 	transform-origin: 0 0;
 	transform: rotate(-90deg) translateX(-100%);
 } 
@@ -22,6 +24,8 @@ video {
 </style>
 </head>
 <body>
+
+	<h1>Test9</h1>
 
 <video src="../images/video001.mp4" id="video001"></video>
 <video src="../images/video002.mp4" id="video002"></video>
@@ -70,8 +74,8 @@ window.ARThreeOnLoad = function() {
 		renderer.setSize(w, h);
 
 		var myCanvas = renderer.domElement;
-		// myCanvas.width = 100; 
-		// myCanvas.height = 100;
+		//myCanvas.width = 10000; 
+		//myCanvas.height = 10000;
 		document.body.insertBefore(myCanvas, document.body.firstChild);
 
 	
