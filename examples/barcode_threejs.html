@@ -123,15 +123,21 @@ window.ARThreeOnLoad = function() {
 
 				raycaster.setFromCamera( mouse, arScene.camera );
 				
-				
-				var intersects = raycaster.intersectObjects( gltf.scene.children, false );
+				var targetlist = gltf.scene.children.filter(element => element.name.startsWith("Cube"))
+				console.log(targetlist);
+				var intersects = raycaster.intersectObjects( targetlist, false );
 				console.log(intersects);
 				
-
+				
+				//Tür geht auf
 				try {
+					const hitTargetId = intersects[0].object.name.replace("Cube", "")
+					console.log(hitTargetId)
 					intersects[0].object.material.map.image.play();
+					const door = gltf.scene.children.find(element => element.name == "Door" + hitTargetId)
+					door.rotation.y += 2;
 				} catch {
-					console.log("no click target found");
+					console.log("door - no click target found");
 				}
 			}
 
