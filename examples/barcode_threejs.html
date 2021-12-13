@@ -27,25 +27,25 @@ video {
 </head>
 <body>
 
-<video src="../images/video001.mp4" id="video001"></video>
-<video src="../images/video002.mp4" id="video002"></video>
-<video src="../images/video003.mp4" id="video003"></video>
-<video src="../images/video004.mp4" id="video004"></video>
-<video src="../images/video005.mp4" id="video005"></video>
-<video src="../images/video006.mp4" id="video006"></video>
-<video src="../images/video007.mp4" id="video007"></video>
-<video src="../images/video008.mp4" id="video008"></video>
-<video src="../images/video009.mp4" id="video009"></video>
-<video src="../images/video010.mp4" id="video010"></video>
-<video src="../images/video011.mp4" id="video011"></video>
-<video src="../images/video012.mp4" id="video012"></video>
-<video src="../images/video013.mp4" id="video013"></video>
-<video src="../images/video014.mp4" id="video014"></video>
-<video src="../images/video015.mp4" id="video015"></video>
-<video src="../images/video016.mp4" id="video016"></video>
-<video src="../images/video017.mp4" id="video017"></video>
-<video src="../images/video018.mp4" id="video018"></video>
-<video src="../images/video019.mp4" id="video019"></video>
+<video src="../images/video001.mp4" id="video001" playsinline></video>
+<video src="../images/video002.mp4" id="video002" playsinline></video>
+<video src="../images/video003.mp4" id="video003" playsinline></video>
+<video src="../images/video004.mp4" id="video004" playsinline></video>
+<video src="../images/video005.mp4" id="video005" playsinline></video>
+<video src="../images/video006.mp4" id="video006" playsinline></video>
+<video src="../images/video007.mp4" id="video007" playsinline></video>
+<video src="../images/video008.mp4" id="video008" playsinline></video>
+<video src="../images/video009.mp4" id="video009" playsinline></video>
+<video src="../images/video010.mp4" id="video010" playsinline></video>
+<video src="../images/video011.mp4" id="video011" playsinline></video>
+<video src="../images/video012.mp4" id="video012" playsinline></video>
+<video src="../images/video013.mp4" id="video013" playsinline></video>
+<video src="../images/video014.mp4" id="video014" playsinline></video>
+<video src="../images/video015.mp4" id="video015" playsinline></video>
+<video src="../images/video016.mp4" id="video016" playsinline></video>
+<video src="../images/video017.mp4" id="video017" playsinline></video>
+<video src="../images/video018.mp4" id="video018" playsinline></video>
+<video src="../images/video019.mp4" id="video019" playsinline></video>
 
 
 
@@ -181,7 +181,7 @@ window.ARThreeOnLoad = function() {
 
 								function doorOpening () {
 									var rotationTarget = 2;
-									const rotationV = (rotationTarget - door.rotation.y) * 0.1;
+									const rotationV = (rotationTarget - door.rotation.y) * 0.05;
 									door.rotation.y += rotationV;
 									requestAnimationFrame(doorOpening);
 								}
@@ -194,7 +194,7 @@ window.ARThreeOnLoad = function() {
 									var rotationTarget = 0;
 									const rotationV = (rotationTarget - door.rotation.y) * 0.1;
 									door.rotation.y -= rotationV;	
-									rotationV *= 0.1;
+									rotationV *= 0;
 									requestAnimationFrame(doorClosing);
 								}
 								doorClosing();
