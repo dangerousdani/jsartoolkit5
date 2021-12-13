@@ -129,7 +129,7 @@
 			audioLoader.load( '../images/Christmas-Chores.mp3', function( buffer ) {
 				sound.setBuffer( buffer );
 				sound.setLoop( true );
-				sound.setVolume( 0.06 );
+				sound.setVolume( 0.04 );
 				sound.play();
 			});
 
