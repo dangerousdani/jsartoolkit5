@@ -126,7 +126,7 @@
 
 			// load a sound and set it as the Audio object's buffer
 			const audioLoader = new THREE.AudioLoader();
-			audioLoader.load( '../images/Christmas-Chores.mp3', function( buffer ) {
+			audioLoader.load( '../images/Christmas-Village.mp3', function( buffer ) {
 				sound.setBuffer( buffer );
 				sound.setLoop( true );
 				sound.setVolume( 0.04 );
