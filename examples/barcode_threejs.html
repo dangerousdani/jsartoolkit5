@@ -164,8 +164,7 @@ window.ARThreeOnLoad = function() {
 
 			document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 			
-			function onDocumentMouseDown( event ) 
-			{
+			function onDocumentMouseDown( event ) {
 				const targetlist = gltf.scene.children.filter(element => element.name.startsWith("Cube"))
 				const hitTarget = findObjectUnderEvent(event, arScene.camera, targetlist)
 				console.log(hitTarget)
@@ -176,14 +175,31 @@ window.ARThreeOnLoad = function() {
 						console.log(hitTargetId)
 						const door = gltf.scene.children.find(element => element.name == "Door" + hitTargetId)
 						const videoObject = hitTarget.material.map.image;
-						if (videoObject.paused) {
-							videoObject.play();
-							door.rotation.y += 2;	
-						}
-						else {
-							videoObject.pause();
-							door.rotation.y += -2;
-					}
+						
+							if (videoObject.paused) {
+								videoObject.play();
+
+								function doorOpening () {
+									var rotationTarget = 2;
+									const rotationV = (rotationTarget - door.rotation.y) * 0.1;
+									door.rotation.y += rotationV;
+									requestAnimationFrame(doorOpening);
+								}
+								doorOpening();
+							}
+							else {
+								videoObject.pause();
+								
+								function doorClosing () {
+									var rotationTarget = 0;
+									const rotationV = (rotationTarget - door.rotation.y) * 0.1;
+									door.rotation.y -= rotationV;	
+									rotationV *= 0.1;
+									requestAnimationFrame(doorClosing);
+								}
+								doorClosing();
+							}
+					
 				} catch {
 					console.log("door - no click target found");
 				}
@@ -191,8 +207,6 @@ window.ARThreeOnLoad = function() {
 
 			
 				
-				var rotationV = 0;
-				var rotationTarget = 0;
 				
 				
 				var tick = function() {
