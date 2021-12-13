@@ -129,7 +129,7 @@
 			audioLoader.load( '../images/Jingle-Bells.mp3', function( buffer ) {
 				sound.setBuffer( buffer );
 				sound.setLoop( true );
-				sound.setVolume( 0.5 );
+				sound.setVolume( 0.08 );
 				sound.play();
 			});
 
