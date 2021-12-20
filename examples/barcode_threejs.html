@@ -23,6 +23,8 @@ video {
 	display: none;
 }
 
+
+
 </style>
 </head>
 <body>
@@ -46,8 +48,6 @@ video {
 <video src="../images/video017.mp4" id="video017" playsinline></video>
 <video src="../images/video018.mp4" id="video018" playsinline></video>
 <video src="../images/video019.mp4" id="video019" playsinline></video>
-
-
 
 <script src="js/third_party/three.js/three.min.js"></script>
 <script src="../js/artoolkit.api.js"></script>
@@ -141,11 +141,16 @@ window.ARThreeOnLoad = function() {
 
 		document.body.insertBefore(renderer.domElement, document.body.firstChild);
 
-		// See /doc/patterns/Matrix code 3x3 (72dpi)/20.png
-		var markerRoot = arController.createThreeBarcodeMarker(20);
+		//See /doc/patterns/Matrix code 3x3 (72dpi)/20.png
+		//var markerRoot = arController.createThreeBarcodeMarker(20);
 
-		
-		
+		arController.loadMarker('test-2.patt', function(markerId) {
+		var markerRoot = arController.createThreeBarcodeMarker(markerId);
+    	//markerRoot.add(scene);
+    	//arScene.scene.add(markerRoot);
+  		});
+
+
 		const loader = new THREE.GLTFLoader();
 		
 		loader.load( '../images/Calendar.glb', function ( gltf ) {
@@ -202,19 +207,9 @@ window.ARThreeOnLoad = function() {
 				}
 			}
 
-			
-				
-				
-				
 				var tick = function() {
 					arScene.process();
 					arScene.renderOn(renderer);
-					
-					// if (markerRoot.children[0] !== undefined) {
-						// 	rotationV += (rotationTarget - markerRoot.children[0].children[21].rotation.y) * 0.005;	
-						// 	markerRoot.children[0].children[25].rotation.y += rotationV;
-						// } 
-						// rotationV *= 0.9;
 						
 						requestAnimationFrame(tick);
 					};
