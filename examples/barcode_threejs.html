@@ -117,13 +117,15 @@ var findObjectUnderEvent = function(ev, camera, objects) {
 
 window.ARThreeOnLoad = function() {
 
+	
+		
+
 	ARController.getUserMediaThreeScene({maxARVideoSize: 320, cameraParam: 'Data/camera_para-iPhone 5 rear 640x480 1.0m.dat',
 	onSuccess: function(arScene, arController, arCamera) {
 
 		document.body.className = arController.orientation;
 
-		arController.setPatternDetectionMode(artoolkit.AR_MATRIX_CODE_DETECTION);
-
+		arController.loadMarker('pattern-treee.patt', function(markerId) {
 		var renderer = new THREE.WebGLRenderer({antialias: true});
 		if (arController.orientation === 'portrait') {
 			var w = (window.innerWidth / arController.videoHeight) * arController.videoWidth;
@@ -143,12 +145,11 @@ window.ARThreeOnLoad = function() {
 
 		//See /doc/patterns/Matrix code 3x3 (72dpi)/20.png
 		//var markerRoot = arController.createThreeBarcodeMarker(20);
-
-		arController.loadMarker('test-2.patt', function(markerId) {
 		var markerRoot = arController.createThreeBarcodeMarker(markerId);
+		
     	//markerRoot.add(scene);
     	//arScene.scene.add(markerRoot);
-  		});
+  		
 
 
 		const loader = new THREE.GLTFLoader();
@@ -221,9 +222,12 @@ window.ARThreeOnLoad = function() {
 			}, undefined, function ( error ) {	
 				console.error( error ); 
 			} );	
+		});
 	}});
 
 	delete window.ARThreeOnLoad;
+
+
 
 };
 
