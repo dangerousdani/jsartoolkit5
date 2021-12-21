@@ -57,8 +57,6 @@ video {
 <script src="js/threex.domevents.js"></script>
 
 <script>
-
-var param = new ARCameraParam();
 var findObjectUnderEvent = function(ev, camera, objects) {
 	var style = getComputedStyle(ev.target);
 	var elementTransform = style.getPropertyValue('transform');
@@ -128,7 +126,6 @@ window.ARThreeOnLoad = function() {
 		document.body.className = arController.orientation;
 
 		arController.setPatternDetectionMode(artoolkit.AR_TEMPLATE_MATCHING_COLOR_AND_MATRIX);
-
 
 		arController.loadMarker('tree.patt', function(markerId) {
 		var renderer = new THREE.WebGLRenderer({antialias: true});
@@ -239,8 +236,6 @@ window.ARThreeOnLoad = function() {
 if (window.ARController && ARController.getUserMediaThreeScene) {
 	ARThreeOnLoad();
 }
-
-param.src = 'camera_para.dat';
 
 </script>
 
