@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>8 StanHema</title>
+<title>StanHema</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <style>
 html,body {
@@ -22,8 +22,6 @@ html,body {
 video {
 	display: none;
 }
-
-
 
 </style>
 </head>
@@ -151,11 +149,6 @@ window.ARThreeOnLoad = function() {
 		//See /doc/patterns/Matrix code 3x3 (72dpi)/20.png
 		//var markerRoot = arController.createThreeBarcodeMarker(20);
 		var markerRoot = arController.createThreeBarcodeMarker(markerId);
-		
-    	//markerRoot.add(scene);
-    	//arScene.scene.add(markerRoot);
-  		
-
 
 		const loader = new THREE.GLTFLoader();
 		
@@ -184,13 +177,12 @@ window.ARThreeOnLoad = function() {
 						const door = gltf.scene.children.find(element => element.name == "Door" + hitTargetId)
 						const videoObject = hitTarget.material.map.image;
 						
+						
 							if (videoObject.paused) {
 								videoObject.play();
 
 								function doorOpening () {
-									var rotationTarget = 2;
-									const rotationV = (rotationTarget - door.rotation.y) * 0.05;
-									door.rotation.y += rotationV;
+									door.rotation.x = Math.PI / 3.5;
 									requestAnimationFrame(doorOpening);
 								}
 								doorOpening();
@@ -199,10 +191,7 @@ window.ARThreeOnLoad = function() {
 								videoObject.pause();
 								
 								function doorClosing () {
-									var rotationTarget = 0;
-									const rotationV = (rotationTarget - door.rotation.y) * 0.1;
-									door.rotation.y -= rotationV;	
-									rotationV *= 0;
+									door.rotation.x = Math.PI;
 									requestAnimationFrame(doorClosing);
 								}
 								doorClosing();
